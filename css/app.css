@@ -1,0 +1,148 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #3498db;
+}
+
+    .card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+    }
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="color"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+}
+
+button {
+    background: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+    button:hover {
+        background: #2980b9;
+    }
+
+    button.danger {
+        background: #e74c3c;
+    }
+
+        button.danger:hover {
+            background: #c0392b;
+        }
+
+    button.success {
+        background: #27ae60;
+    }
+
+        button.success:hover {
+            background: #229954;
+        }
+
+.state-display {
+    background: #ecf0f1;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.sequence {
+    background: #ecf0f1;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-family: monospace;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.snapshots-list {
+    margin-top: 10px;
+}
+
+.snapshot-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 8px;
+    background: #ecf0f1;
+    border-radius: 6px;
+}
+
+.snapshot-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.snapshot-text {
+    flex-grow: 1;
+    font-family: monospace;
+}
+
+.sphere-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #27ae60;
+}
+
+    .sphere-card h3 {
+        color: #2c3e50;
+        margin-top: 0;
+    }

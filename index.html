@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloch-gömb szimulátor</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="js/plotly.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <component type="typeof(App)" render-mode="WebAssembly" />
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        function drawBlochSphere(x, y, z, snapshots) {
+            const nu = 30, nv = 30;
+            const xs = [], ys = [], zs = [];
+
+            for (let i = 0; i <= nu; i++) {
+                xs[i] = []; ys[i] = []; zs[i] = [];
+                const u = (i * Math.PI) / nu;
+                for (let j = 0; j <= nv; j++) {
+                    const v = (j * 2 * Math.PI) / nv;
+                    xs[i][j] = Math.sin(u) * Math.cos(v);
+                    ys[i][j] = Math.sin(u) * Math.sin(v);
+                    zs[i][j] = Math.cos(u);
+                }
+            }
+
+            const sphere = {
+                type: 'surface',
+                x: xs, y: ys, z: zs,
+                opacity: 0.2,
+                showscale: false
+            };
+
+            const current = {
+                type: 'scatter3d',
+                mode: 'markers',
+                x: [x], y: [y], z: [z],
+                marker: { size: 8, color: '#3498db' },
+                name: 'Aktuális',
+                showlegend: false
+            };
+
+            const vector = {
+                type: 'scatter3d',
+                mode: 'lines', 
+                x: [0, x], y: [0, y], z: [0, z], 
+                line: { width: 4, color: '#3498db' },
+                name: 'Bloch Vektor',
+                showlegend: true 
+            };
+
+            const snaps = snapshots.map(s => ({
+                type: 'scatter3d',
+                mode: 'markers',
+                x: [s.x], y: [s.y], z: [s.z],
+                marker: { size: 6, color: s.color },
+                name: s.label
+            }));
+
+            const layout = {
+                scene: {
+                    xaxis: { range: [-1, 1] },
+                    yaxis: { range: [-1, 1] },
+                    zaxis: { range: [-1, 1] },
+                    aspectmode: 'cube'
+                },
+                margin: { l: 0, r: 0, t: 0, b: 0 },
+                showlegend: true
+            };
+
+            Plotly.newPlot('sphere', [sphere, vector, current, ...snaps], layout, { responsive: true });
+        }
+    </script>
+</body>
+</html>
