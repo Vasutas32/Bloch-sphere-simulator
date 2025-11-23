@@ -6,31 +6,46 @@
     <title>Bloch-gömb szimulátor</title>
     <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
+    <!-- Plotly.js könyvtár betöltése a 3D megjelenítéshez -->
     <script src="js/plotly.min.js"></script>
 </head>
-<body>
+<!-- Body padding: 0 maradt, hogy a lábléc szélei elérjék a képernyő szélét -->
+<body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; padding: 0;">
 
-    <div id="app">
+    <!-- Tartalom padding: 20px maradt, a szép elrendezésért -->
+    <div id="app" style="flex: 1; padding: 20px;">
+        <!-- Blazor betöltéséig megjelenő tartalom -->
         <component type="typeof(App)" render-mode="WebAssembly" />
     </div>
+    
+    <!-- JAVÍTÁS: padding: 15px 0; hozzáadva, hogy a sáv magasabb legyen -->
+    <footer style="background-color: #f8f9fa; text-align: center; border-top: 1px solid #dee2e6; font-size: 0.9rem; padding: 15px 0;">
+        Készítette: <strong>Varga Marcell Simon és Borvendég Benedek</strong>
+    </footer>
 
     <script src="_framework/blazor.webassembly.js"></script>
+    
+    <!-- Bloch-gömb kirajzoló szkript -->
     <script>
+        // Ez a függvény végzi a Bloch-gömb és az állapotvektorok megjelenítését
         function drawBlochSphere(x, y, z, snapshots) {
-            const nu = 30, nv = 30;
+            const nu = 30, nv = 30; // Rácspontok felbontása
             const xs = [], ys = [], zs = [];
 
+            // Gömb felületének pontjainak generálása
             for (let i = 0; i <= nu; i++) {
                 xs[i] = []; ys[i] = []; zs[i] = [];
                 const u = (i * Math.PI) / nu;
                 for (let j = 0; j <= nv; j++) {
                     const v = (j * 2 * Math.PI) / nv;
+                    // Szférikus -> Descartes koordináta transzformáció
                     xs[i][j] = Math.sin(u) * Math.cos(v);
                     ys[i][j] = Math.sin(u) * Math.sin(v);
                     zs[i][j] = Math.cos(u);
                 }
             }
 
+            // 1. A gömb felszínének definíciója (átlátszó drótváz)
             const sphere = {
                 type: 'surface',
                 x: xs, y: ys, z: zs,
@@ -38,6 +53,7 @@
                 showscale: false
             };
 
+            // 2. Az aktuális állapot végpontjának jelölése
             const current = {
                 type: 'scatter3d',
                 mode: 'markers',
@@ -47,6 +63,7 @@
                 showlegend: false
             };
 
+            // 3. Az állapotvektor vonala a középpontból
             const vector = {
                 type: 'scatter3d',
                 mode: 'lines', 
@@ -56,6 +73,7 @@
                 showlegend: true 
             };
 
+            // 4. Mentett pillanatképek (snapshots) feldolgozása
             const snaps = snapshots.map(s => ({
                 type: 'scatter3d',
                 mode: 'markers',
@@ -64,6 +82,7 @@
                 name: s.label
             }));
 
+            // Elrendezés beállításai (tengelyek, méretarány)
             const layout = {
                 scene: {
                     xaxis: { range: [-1, 1] },
@@ -72,9 +91,12 @@
                     aspectmode: 'cube'
                 },
                 margin: { l: 0, r: 0, t: 0, b: 0 },
-                showlegend: true
+                showlegend: true,
+                // Jelmagyarázat (legend) alulra (y: 0)
+                legend: { x: 0, y: 0 }
             };
 
+            // A diagram kirajzolása a 'sphere' azonosítójú div-be
             Plotly.newPlot('sphere', [sphere, vector, current, ...snaps], layout, { responsive: true });
         }
     </script>

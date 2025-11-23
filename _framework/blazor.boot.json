@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlochSimulator",
   "resources": {
-    "hash": "sha256-1TcnGX+K9sr0TKG88PMjEdR4hzakdE+zXLj30f3wHuY=",
+    "hash": "sha256-JUfxgToywcEtzleNVzr19XrhcRpdYS3KnwtA0O8UwP0=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-xNQsYHtL1vcbrVTHDZAwJM4WovpoyjsrM2C6FQ8cW1w="
     },
@@ -18,7 +18,7 @@
     },
     "coreAssembly": {},
     "assembly": {
-      "BlochSimulator.wasm": "sha256-WBnBt7UW7bU5WapPPrDcJrzXWLxiQgQRGXmHIOmB7BY=",
+      "BlochSimulator.wasm": "sha256-OiRR5W4ovUMMVAhptzeOa3cn6Q46GAncdVASpjc87IQ=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-AHyDhPR/xvoykWusS7ZCqhoqOPwXzHKyrY8bLRCe5Ck=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-cFuw/+bk0lc4EEOBrh/PUgghGmsyiXdaZnO4LGeA0u8=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-g89ZyzgJ823TqwG2mRV0v7+PyPBeygG8NBZzu44GlU4=",
